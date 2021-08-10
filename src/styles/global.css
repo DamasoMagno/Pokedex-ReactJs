@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --red: #FF0000;
+  --white-smoke: #F5F5F5;
+  --white: #FFF;
+  --yellow: #FFF000;
+
+  --water: rgb(93, 93, 250);
+  --grass: green;
+  --fire: orange;
+  --ground: brown;
+  --eletric: yellow;
+  --normal: gray;
+  --psychic: pink;
+  --flying: purple;
+  --ghost: gray;
+  --bug: darkgreen;
+  --poison: rgb(199, 20, 199);
+}
+
+body {
+  background: var(--white-smoke);
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}

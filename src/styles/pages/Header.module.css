@@ -1,0 +1,13 @@
+.container {
+  background: rgba(255, 25, 0, .8);
+  box-shadow: 1px 0px 10px rgba(0, 0, 0, .5);
+}
+
+.content {
+  padding: .25rem 1rem 3rem;
+  text-align: center;
+}
+
+.content img {
+  opacity: .9;
+}

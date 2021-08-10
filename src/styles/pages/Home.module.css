@@ -1,0 +1,62 @@
+.container {
+  max-width: 70%;
+  margin: 0 auto 1rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.content {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+@media(max-width: 1024px){
+  .content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media(max-width: 720px){
+  .content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.searchPokemon {
+  margin: auto;
+  margin-top: -1.5rem;
+}
+
+.searchPokemon input {
+  padding: .5rem .5rem;
+  border-radius: .25rem;
+  border: 0;
+  background: #eeee;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+  font-size: 1.25rem;
+}
+
+.seeMore {
+  background: orange;
+  color: var(--white);
+  border: 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  font-weight: 500;
+  transform: translateX(-50%);
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  font-size: 1.25rem;
+  transition: filter .2s;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+}
+
+.seeMore:hover {
+  filter: brightness(.95);
+}
