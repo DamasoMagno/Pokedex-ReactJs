@@ -1,14 +1,15 @@
 .container {
   max-width: 70%;
-  margin: 0 auto 1rem;
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
-  position: relative;
   padding-bottom: 3rem;
 }
 
 .content {
-  margin-top: 2rem;
+  margin-top: 3rem;
+
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
@@ -27,8 +28,18 @@
 }
 
 .searchPokemon {
-  margin: auto;
-  margin-top: -1.5rem;
+  margin: -1.5rem auto 0;
+}
+
+@media(max-width: 720px){
+  .searchPokemon {
+    width: 100%;
+    display: flex;
+  }
+
+  .searchPokemon input {
+    flex: 1;
+  }
 }
 
 .searchPokemon input {
@@ -44,8 +55,8 @@
   background: orange;
   color: var(--white);
   border: 0;
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 10px;
   left: 50%;
   font-weight: 500;
   transform: translateX(-50%);

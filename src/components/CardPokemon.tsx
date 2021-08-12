@@ -1,8 +1,7 @@
 import Link from "next/link";
 import styles from "../styles/pages/Card.module.css";
 
-import { Pokemon } from "../interfaces";
-
+import { Pokemon } from "../interfaces/pokemon";
 interface CardPokemonProps {
   pokemon: Pokemon;
 }
@@ -16,9 +15,14 @@ export function Card({ pokemon }: CardPokemonProps) {
         <strong>{pokemon.name}</strong>
 
         <div className={styles.types}>
-          {pokemon.types.map(({ type }) => {
-            return <span style={{ background: `var(--${type.name})` }} key={type.url}>{type.name}</span>
-          })}
+          {pokemon.types.map(({ type }) => (
+            <span
+              style={{ background: `var(--${type.name})` }}
+              key={type.url}
+            >
+              {type.name}
+            </span>
+          ))}
         </div>
 
         <div className={styles.position}>
