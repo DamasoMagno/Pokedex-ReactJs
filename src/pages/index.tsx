@@ -10,59 +10,41 @@ import styles from "../styles/pages/Home.module.css";
 import { Pokemon } from "../interfaces/pokemon";
 
 export default function Home() {
-  const { limitOfAllPokemons, setLimitOfAllPokemons } = useContext(offsetContext);
+  const { allCurrentPokemons, setAllCurrentPokemons, setCurrentOffset, currentOffset } = useContext(offsetContext);
 
   const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
   const [pokemon, setPokemon] = useState<Pokemon>();
 
-  const [offset, setOffset] = useState(1);
-  const [currentLimit, setCurrentLimit] = useState(20);
-
   const [buttonSearchDisabled, setButtonSearchDisabled] = useState(false);
   const [error, setError] = useState("");
 
+  const initalOffset = 1;
   let timer = null;
 
   useEffect(() => {
-    if(limitOfAllPokemons > 10){
-      renderPokemons(1, limitOfAllPokemons);
-      return;
-    }
-    
-    renderPokemons(offset, currentLimit);
+    renderPokemons(initalOffset, allCurrentPokemons);
   }, []);
 
-  async function renderPokemons(offset, currentLimit) {
-    while(offset <= currentLimit) {
-      const pokemon = await api.get<Pokemon>(`${offset}`)
+  async function renderPokemons(currentOffset: number, currentLimit: number) {
+    while (currentOffset <= currentLimit) {
+      const pokemon = await api.get<Pokemon>(`${currentOffset}`)
       setAllPokemons(pokemons => [...pokemons, pokemon.data])
-      offset++;
+      currentOffset++;
     }
-  }
-
-  async function handleDisplayMorePokemons(...args: [number, number, number?]){
-    setButtonSearchDisabled(true);
-
-    await renderPokemons(args[0], args[1]);
-
-    setLimitOfAllPokemons(args[2] || args[1]);
-    setButtonSearchDisabled(false);
   }
 
   async function showMorePokemons() {
-    const newOffset = offset + 20;
-    const newCurrentLimit = currentLimit + 20;
+    const newCurrentOffset = currentOffset + 20;
+    const newLimitOfAllPokemons = allCurrentPokemons + 20;
 
-    setOffset(newOffset);
-    setCurrentLimit(newCurrentLimit);
+    setCurrentOffset(newCurrentOffset);
+    setAllCurrentPokemons(newLimitOfAllPokemons);
 
-    if(limitOfAllPokemons > 10){
-      handleDisplayMorePokemons(limitOfAllPokemons + 1, limitOfAllPokemons + 20, newCurrentLimit);
-      return;
-    }
-
-    handleDisplayMorePokemons(newOffset, newCurrentLimit)
+    setButtonSearchDisabled(true);
+    await renderPokemons(newCurrentOffset, newLimitOfAllPokemons);
+    setButtonSearchDisabled(false);
   }
+
 
   function handleSearchPokemon(e: ChangeEvent<HTMLInputElement>) {
     clearTimeout(timer);
